@@ -18,7 +18,7 @@ class DbConnection():
         self.password = settings['password']
         
         # Yhteysmerkkijono
-        self.connectionString = f'dbname={self.databaseName} user={self.userName} password={cipher.decryptString(self.password)} host={self.server} port={self.port}'
+        self.connectionString = f'dbname={self.databaseName} user={self.userName} password={self.password} host={self.server} port={self.port}'
 
     # Metodi tietojen lisäämiseen (INSERT)
     def addToTable(self, table: str, data: dict) -> str:
@@ -92,6 +92,23 @@ class DbConnection():
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
 
+    def getColumnNames(self, table: str) -> list:
+        try:
+            currentConnection = psycopg2.connect(self.connectionString)
+            cursor = currentConnection.cursor()
+            sqlClause = f'SELECT * FROM {table} LIMIT 0'
+            cursor.execute(sqlClause)
+            columnNames = [desc[0] for desc in cursor.description]
+            return columnNames
+        
+        except(Exception, psycopg2.Error) as e:
+            raise e
+        
+        finally:
+            if currentConnection:
+                cursor.close()
+                currentConnection.close()
+
 
     def readChosenColumnFormTable(self, table, columns):
         records = []
@@ -107,6 +124,7 @@ class DbConnection():
             # Suoritetaan SQL-lause
             cursor.execute(sqlClause)
             records = cursor.fetchall()
+            return records
 
         except(Exception, psycopg2.Error) as e:
             raise e
@@ -116,8 +134,8 @@ class DbConnection():
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
+        
 
-        return records
     
     def filterColumnsFromTable(self, table: str, columns: list, filter: str):
         try:
@@ -222,7 +240,7 @@ class DbConnection():
 
 if __name__ == '__main__':
 
-    testiasetukset = {"server": "127.0.0.1", "port": "5432", "database": "autolainaus", "userName": "autolainaus", "password": "gAAAAABnpGftFOtj6nvknyzBYXRw-mdPn9JcLc6jqE5_9639RYTsabBrkH7H9A5FlhqMVCrC2zcSllPX6TIXZXuirj3JVmj-dQ=="}
+    testiasetukset = {"server": "127.0.0.1", "port": "5432", "database": "autolainaus", "userName": "autolainaus", "password": "helenium"}
     dbConnection = DbConnection(testiasetukset)
    
     """ testidata = {'ryhma': 'Mopo Jopo',
@@ -250,3 +268,9 @@ if __name__ == '__main__':
 
     """ rowToDelete = dbConnection.deleteRowsFromTable('ajoneuvotyyppi', 'ajoneuvotyyppi', 'urheiluauto') """
 
+    testi = dbConnection.getColumnNames('auto')
+    print(testi)
+
+
+   
+ 
