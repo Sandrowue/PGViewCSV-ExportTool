@@ -108,6 +108,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui.esikatseluTableWidget.clear()
             self.ui.esikatseluTableWidget.setColumnCount(0)
             self.ui.esikatseluTableWidget.setRowCount(0)
+            
         else:
 
             try:
