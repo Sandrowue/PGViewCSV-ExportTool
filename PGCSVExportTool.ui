@@ -333,7 +333,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>50</y>
+      <y>70</y>
       <width>211</width>
       <height>251</height>
      </rect>
@@ -344,65 +344,84 @@
     <widget class="QLineEdit" name="muuLineEdit">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>200</y>
+       <x>90</x>
+       <y>190</y>
        <width>110</width>
        <height>24</height>
       </rect>
      </property>
     </widget>
-    <widget class="QSplitter" name="splitter">
+    <widget class="QRadioButton" name="puolipisteRadioButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>69</y>
+       <width>114</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>puolipiste (;)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="pilkkuRadioButton">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>10</y>
-       <width>114</width>
-       <height>231</height>
+       <width>87</width>
+       <height>23</height>
       </rect>
      </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
-     <widget class="QRadioButton" name="pilkkuRadioButton">
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>pilkku (,)</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="puolipisteRadioButton">
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>puolipiste (;)</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="sarkainRadioButton">
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>sarkain ( )</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="muuRadioButton">
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>muu:</string>
-      </property>
-     </widget>
+     <property name="text">
+      <string>pilkku (,)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="sarkainRadioButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>128</y>
+       <width>95</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>sarkain ( )</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="muuRadioButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>187</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>muu:</string>
+     </property>
     </widget>
    </widget>
    <widget class="QLabel" name="esitkatseluLabel">
