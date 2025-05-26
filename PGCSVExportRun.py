@@ -104,7 +104,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def updatePreview(self):
         selectedObject = self.ui.nimiComboBox.currentText()
 
-        if selectedObject == 'Tietokantaobjektin nimi' or '':
+        if selectedObject == 'Tietokantaobjektin nimi' or selectedObject == '':
             self.ui.esikatseluTableWidget.clear()
             self.ui.esikatseluTableWidget.setColumnCount(0)
             self.ui.esikatseluTableWidget.setRowCount(0)
