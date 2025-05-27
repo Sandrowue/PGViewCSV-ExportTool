@@ -27,6 +27,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.dbObjectType = ''
         self.dbObjectName = ''
 
+        # CSV-asetusten oletusarvot
+        self.chosenSeperator = ','
+        self.chosenQualifier = ''
+        self.ui.pilkkuRadioButton.setChecked(True)
+        self.ui.eiMitaanRadioButton.setChecked(True)
+
         # SIGNAALIT
         self.ui.yhteysPushButton.clicked.connect(self.connectDb)
         self.ui.tyyppiComboBox.currentIndexChanged.connect(self.getObjectNames)
@@ -110,7 +116,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui.esikatseluTableWidget.setRowCount(0)
             
         else:
-
             try:
                 dbConnection = dbOperations.DbConnection(self.settingsDictionary)
                 self.resultSet = dbConnection.readAllColumnsFromTable(selectedObject)
@@ -132,8 +137,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 
             except Exception as e:
                 errorDetails = str(e)
-                self.openWarning('Tyhjä!', 'Tauluun ei saatu yhteyttä', errorDetails)
+                self.openWarning('Tyhjä!', 'Tauluun ei saatu yhteyttä tai se on tyhjä.', errorDetails)
 
+    def setDeparator(self):
+        if self.ui.pilkkuRadioButton.isChecked() == True:
+            self.chosenSeperator = ','
+        elif self.ui.puolipisteRadioButton.isChecked() == True:
+            self.chosenSeperator = ';'
+        elif self.ui.sarkainRadioButton.isChecked() == True:
+            self.chosenSeperator = '\t'
+        elif self.ui.muuErotinRadioButton.isChecked() == True:
+            self.chosenSeperator = self.ui.muuErotinLineEdit.text()
+
+    def setQualifier(self):
+        if self.ui.eiMitaanRadioButton.isChecked() == True:
+            self.chosenQualifier = ''
+        elif self.ui.lainausRadioButton.isChecked() == True:
+            self.chosenQualifier = '"'
+        elif self.ui.puolilainausRadioButton.isChecked() == True:
+            self.chosenQualifier = "'"
+        elif self.ui.muuTunnisteRadioButton.isChecked() == True:
+            self.chosenQualifier = self.ui.muuTunnisteLineEdit.text()
 
     def openWarning(self, title, message, detailedMessage):
         msgBox = QtWidgets.QMessageBox()
@@ -143,7 +167,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         msgBox.setDetailedText(detailedMessage)
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
-
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
